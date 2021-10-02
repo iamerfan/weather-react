@@ -1,36 +1,30 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const ip_api = 'https://api.geoapify.com/v1/ipinfo?apiKey=f717ab370d274318a46a52c809dab145';
-const address = {
-	country: '',
-	city: '',
-	ip: '',
-};
-fetch(ip_api, {
-	method: 'GET',
-})
-	.then(function (response) {
-		return response.json();
-	})
-	.then(function (resulte) {
-		address.country = resulte.country.name;
-		address.city = resulte.city.name;
-		address.ip = resulte.ip;
-		console.log(address.country);
-		console.log(address.city);
-		console.log(address.ip);
-	});
-
 function App() {
+	let date = new Date().toString();
+	const [city, setcity] = useState('');
+	const [ip, setip] = useState('');
+	const ip_api = 'https://api.geoapify.com/v1/ipinfo?apiKey=f717ab370d274318a46a52c809dab145';
+	fetch(ip_api, {
+		method: 'GET',
+	})
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (resulte) {
+			setcity(resulte.city.name);
+			setip(resulte.ip);
+		});
+
 	return (
 		<div className='App'>
 			<header className='App-header'>
 				<img src={logo} className='App-logo' alt='logo' />
+				<p>Created By Erfan "Git"</p>
 				<p>
-					Created By Erfan "Git"
-					<br />
-					Get The ip and location "Console"
+					Your IP Address is " {ip} " And Your Location is " {city} "
 				</p>
 			</header>
 		</div>
