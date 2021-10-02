@@ -23,7 +23,9 @@ function App() {
 				<img src={logo} className='App-logo' alt='logo' />
 				<p>Created By Erfan "Git"</p>
 				<p>
-					Your IP Address is " {ip} " And Your Location is " {city} "
+					IP Address = {ip}
+					<br />
+					Location = {city}
 				</p>
 			</header>
 		</div>
