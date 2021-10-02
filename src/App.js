@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-	let date = new Date().toString();
 	const [city, setcity] = useState('');
 	const [ip, setip] = useState('');
 	const ip_api = 'https://api.geoapify.com/v1/ipinfo?apiKey=f717ab370d274318a46a52c809dab145';
