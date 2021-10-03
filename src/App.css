@@ -4,16 +4,26 @@
 
 .App-logo {
 	height: 40vmin;
-	pointer-events: none;
+	transition: 0.5s;
+}
+p {
+	margin: 1.5rem 0 0.5rem 0;
+	padding: 0;
+}
+
+.Credit {
+	opacity: 0.2;
+	font-size: 0.8rem;
+	font-weight: 100;
 }
 
 @media (prefers-reduced-motion: no-preference) {
 	.App-logo {
-		animation: App-logo-spin infinite 2s linear;
+		animation: App-logo-spin infinite 7s linear;
 	}
 }
 
-.App-header {
+.App-main {
 	background-color: #282c34;
 	min-height: 100vh;
 	display: flex;
