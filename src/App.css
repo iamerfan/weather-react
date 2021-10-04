@@ -3,26 +3,37 @@
 }
 
 .App-logo {
-	height: 40vmin;
+	height: 30vmin;
+	transition: 0.5s;
+	user-select: none;
+	animation: App-logo-spin infinite 7s linear;
+}
+.DataDiv {
+	opacity: 0;
+	margin: 1.5rem 0;
 	transition: 0.5s;
 }
-p {
-	margin: 1.5rem 0 0.5rem 0;
-	padding: 0;
+.LoadingDiv {
+	position: absolute;
+	margin: 4.2rem 0;
+	border: solid transparent 5px;
+	height: 4rem;
+	width: 4rem;
+	border-radius: 50%;
+	border-top: #61dafb 5px solid;
+	border-left: #61dafb 5px solid;
+	animation: LoadingAnimation infinite 1s linear;
 }
 
 .Credit {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, 0);
 	opacity: 0.2;
-	font-size: 0.8rem;
+	font-size: 1rem;
 	font-weight: 100;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-	.App-logo {
-		animation: App-logo-spin infinite 7s linear;
-	}
-}
-
 .App-main {
 	background-color: #282c34;
 	min-height: 100vh;
@@ -39,6 +50,14 @@ p {
 }
 
 @keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+@keyframes LoadingAnimation {
 	from {
 		transform: rotate(0deg);
 	}
