@@ -21,7 +21,7 @@ class App extends Component {
 
 	SearchBarData = (SearchBarValue) => {
 		fetch(
-			'http://api.openweathermap.org/data/2.5/weather?q=' +
+			'https://api.openweathermap.org/data/2.5/weather?q=' +
 				SearchBarValue +
 				'&units=metric&APPID=08ab3268ec3421db220e4401ed6ec8d7'
 		)
@@ -51,7 +51,7 @@ class App extends Component {
 	componentDidMount() {
 		window.addEventListener('load', () => {
 			fetch(
-				'http://api.openweathermap.org/data/2.5/weather?q=Ahvaz&units=metric&APPID=08ab3268ec3421db220e4401ed6ec8d7'
+				'https://api.openweathermap.org/data/2.5/weather?q=Ahvaz&units=metric&APPID=08ab3268ec3421db220e4401ed6ec8d7'
 			)
 				.then((response) => response.json())
 				.then((data) => {
