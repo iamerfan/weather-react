@@ -1,48 +1,93 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import SearchBar from './SearchBar';
+import Location from './Location';
+import Tempreture from './Tempreture';
 
-function App() {
-	const [city, setcity] = useState('');
-	const [country, setcountry] = useState('');
-	const [flag, setflag] = useState('');
-	const [ip, setip] = useState('');
+class App extends Component {
+	constructor() {
+		super();
+		this.state = {
+			temp: '',
+			forecast: '',
+			Location: '',
+			wind: '',
+			maxTemp: '',
+			minTemp: '',
+			humidity: '',
+			rain: '',
+			icon: '',
+		};
+	}
 
-	//Get IP & City From API
-	function Get_Data() {
-		fetch('https://api.geoapify.com/v1/ipinfo?apiKey=f717ab370d274318a46a52c809dab145')
-			.then(function (response) {
-				return response.json();
-			})
-			.then(function (result) {
-				setcity(result.city.name);
-				setcountry(result.country.name);
-				setflag('https://www.countryflags.io/' + result.country.iso_code + '/flat/16.png');
-				setip(result.ip);
-				if (city !== '') {
-					document.getElementById('LoadingDiv').style.display = 'none';
-					document.getElementById('DataDiv').style.opacity = '1';
+	SearchBarData = (SearchBarValue) => {
+		fetch(
+			'http://api.openweathermap.org/data/2.5/weather?q=' +
+				SearchBarValue +
+				'&units=metric&APPID=08ab3268ec3421db220e4401ed6ec8d7'
+		)
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.cod === 200) {
+					this.setState({
+						temp: Math.round(data.main['temp']) + '°',
+						forecast: data.weather[0].main,
+						Location: SearchBarValue,
+						wind: Math.round(data.wind.speed),
+						maxTemp: Math.round(data.main['temp_max']) + '°',
+						minTemp: Math.round(data.main['temp_min']) + '°',
+						humidity: data.main['humidity'] + '%',
+						rain: data.clouds['all'] + '%',
+						icon: 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png',
+					});
+				} else {
+					this.setState({
+						temp: '',
+						Location: SearchBarValue + ' یافت نشد ',
+					});
 				}
 			});
+	};
+
+	componentDidMount() {
+		window.addEventListener('load', () => {
+			fetch(
+				'http://api.openweathermap.org/data/2.5/weather?q=Ahvaz&units=metric&APPID=08ab3268ec3421db220e4401ed6ec8d7'
+			)
+				.then((response) => response.json())
+				.then((data) => {
+					if (data.cod === 200) {
+						this.setState({
+							temp: Math.round(data.main['temp']) + '°',
+							forecast: data.weather[0].main,
+							Location: 'اهواز',
+							wind: Math.round(data.wind.speed),
+							maxTemp: Math.round(data.main['temp_max']) + '°',
+							minTemp: Math.round(data.main['temp_min']) + '°',
+							humidity: data.main['humidity'] + '%',
+							rain: data.clouds['all'] + '%',
+							icon: 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png',
+						});
+					}
+				});
+			setTimeout(() => {
+				document.getElementById('LoadingDiv').style.display = 'none';
+			}, 3000);
+		});
 	}
-	Get_Data();
-
-	return (
-		<div className='App'>
-			<main className='App-main'>
-				<div id='LoadingDiv' className='LoadingDiv'></div>
-				<div className='DataDiv' id='DataDiv'>
-					<img src={logo} className='App-logo' alt='' />
-					<p>IP : {ip}</p>
-					<p>
-						Location : {city} | {country} <img src={flag} alt='' />
-					</p>
+	render() {
+		let isTempExist = this.state.temp;
+		return (
+			<div>
+				<div id='LoadingDiv' className='LoadingDiv'>
+					<div className='Spinner'></div>
 				</div>
-
-				<p className='Credit'>Created By Erfan </p>
-			</main>
-		</div>
-	);
+				<SearchBar SendData={this.SearchBarData} />
+				<div className='Main'>
+					<Location weather={this.state} />
+					{isTempExist === '' ? '' : <Tempreture weather={this.state} />}
+				</div>
+			</div>
+		);
+	}
 }
-
 export default App;
