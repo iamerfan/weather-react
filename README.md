@@ -1,2 +1,2 @@
-# Beta-Projects
-just bunch of Beta Project's for testing
+Weather ReactJS App
+Just A Simple Weather App Using ReactJS
