@@ -39,13 +39,13 @@ class Tempreture extends Component {
 						<i style={{ color: '#e3574d', margin: '0 .5rem', opacity: '.9' }}>
 							<FontAwesomeIcon icon={faTemperatureHigh} />
 						</i>
-						: {this.props.weather.maxTemp}
+						{this.props.weather.maxTemp}
 					</div>
 					<div title='حداقل دما'>
 						<i style={{ color: '#4da2e3', margin: '0 .5rem', opacity: '.9' }}>
 							<FontAwesomeIcon icon={faTemperatureLow} />
 						</i>
-						: {this.props.weather.minTemp}
+						{this.props.weather.minTemp}
 					</div>
 				</div>
 
@@ -56,6 +56,7 @@ class Tempreture extends Component {
 				</div>
 				<div className='ForecastDiv'>
 					<div>
+						سرعت باد
 						<label title='سرعت باد'>
 							<i>
 								<FontAwesomeIcon icon={faWind} />
@@ -66,6 +67,7 @@ class Tempreture extends Component {
 						کیلومتر بر ساعت
 					</div>
 					<div>
+						رطوبت
 						<label title='رطوبت'>
 							<i>
 								<FontAwesomeIcon icon={faTint} />
@@ -75,6 +77,7 @@ class Tempreture extends Component {
 						</label>
 					</div>
 					<div>
+						احتمال بارش
 						<label title='احتمال بارش'>
 							<i>
 								<FontAwesomeIcon icon={faCloudShowersHeavy} />
