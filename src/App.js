@@ -41,7 +41,7 @@ class App extends Component {
                   humidity: data.main['humidity'] + '%',
                   rain: data.clouds['all'] + '%',
                   icon:
-                     'http://openweathermap.org/img/w/' +
+                     'https://openweathermap.org/img/w/' +
                      data.weather[0].icon +
                      '.png',
                   flag:
@@ -78,7 +78,7 @@ class App extends Component {
                      humidity: data.main['humidity'] + '%',
                      rain: data.clouds['all'] + '%',
                      icon:
-                        'http://openweathermap.org/img/w/' +
+                        'https://openweathermap.org/img/w/' +
                         data.weather[0].icon +
                         '.png',
                      flag:
