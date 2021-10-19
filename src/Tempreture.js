@@ -9,7 +9,7 @@ import {
    faCloudShowersHeavy,
 } from '@fortawesome/free-solid-svg-icons';
 
-class Tempreture extends Component {
+export default class Tempreture extends Component {
    renderForecast(forecast) {
       switch (forecast) {
          case 'Clear':
@@ -70,7 +70,7 @@ class Tempreture extends Component {
                </div>
                <div title='رطوبت'>
                   رطوبت
-                  <label >
+                  <label>
                      <i>
                         <FontAwesomeIcon icon={faTint} />
                      </i>
@@ -93,5 +93,3 @@ class Tempreture extends Component {
       );
    }
 }
-
-export default Tempreture;

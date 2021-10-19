@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './index.css';
 
-class SearchBar extends Component {
+export default class SearchBar extends Component {
    constructor() {
       super();
       this.state = {
@@ -42,5 +42,3 @@ class SearchBar extends Component {
       );
    }
 }
-
-export default SearchBar;

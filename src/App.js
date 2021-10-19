@@ -3,7 +3,7 @@ import SearchBar from './SearchBar';
 import Location from './Location';
 import Tempreture from './Tempreture';
 
-class App extends Component {
+export default class App extends Component {
    constructor() {
       super();
       this.state = {
@@ -18,6 +18,7 @@ class App extends Component {
          icon: '',
          countryIso: '',
          flag: '',
+         time: '',
       };
    }
 
@@ -29,8 +30,14 @@ class App extends Component {
       )
          .then((response) => response.json())
          .then((data) => {
+            let today = new Date();
+            let time =
+               today.getHours() +
+               ':' +
+               today.getMinutes() +
+               ':' +
+               today.getSeconds();
             if (data.cod === 200) {
-               console.log(data);
                this.setState({
                   temp: Math.round(data.main['temp']) + '°',
                   forecast: data.weather[0].main,
@@ -48,6 +55,7 @@ class App extends Component {
                      'https://www.countryflags.io/' +
                      data.sys.country +
                      '/flat/24.png',
+                  time: time,
                });
                console.log(this.state);
             } else {
@@ -59,54 +67,40 @@ class App extends Component {
             }
          });
    };
-
    componentDidMount() {
       window.addEventListener('load', () => {
-         fetch(
-            'https://api.openweathermap.org/data/2.5/weather?q=Ahvaz&units=metric&APPID=08ab3268ec3421db220e4401ed6ec8d7',
-         )
-            .then((response) => response.json())
-            .then((data) => {
-               if (data.cod === 200) {
-                  this.setState({
-                     temp: Math.round(data.main['temp']) + '°',
-                     forecast: data.weather[0].main,
-                     Location: 'اهواز',
-                     wind: Math.round(data.wind.speed),
-                     maxTemp: Math.round(data.main['temp_max']) + '°',
-                     minTemp: Math.round(data.main['temp_min']) + '°',
-                     humidity: data.main['humidity'] + '%',
-                     rain: data.clouds['all'] + '%',
-                     icon:
-                        'https://openweathermap.org/img/w/' +
-                        data.weather[0].icon +
-                        '.png',
-                     flag:
-                        'https://www.countryflags.io/' +
-                        data.sys.country +
-                        '/flat/24.png',
-                  });
-               }
-            });
+         const Cities = [
+            'اهواز',
+            'تهران',
+            'مشهد',
+            'اصفهان',
+            'رشت',
+            'شیراز',
+            'کرج',
+            'تبریز',
+            'اردبیل',
+            'آبادان',
+         ];
+         this.SearchBarData(Cities[Math.floor(Math.random() * 10)]);
+
          setTimeout(() => {
             document.getElementById('LoadingDiv').style.display = 'none';
-         }, 1000);
+         }, 3000);
       });
    }
    render() {
       let isTempExist = this.state.temp;
       return (
          <React.Fragment>
-            <div id='LoadingDiv' className='LoadingDiv'>
+            <div id='LoadingDiv'>
                <div className='Spinner'></div>
             </div>
             <SearchBar SendData={this.SearchBarData} />
             <div className='Main'>
-               <Location weather={this.state} />
+               <Location weather={this.state} refresh={this.SearchBarData} />
                {isTempExist === '' ? '' : <Tempreture weather={this.state} />}
             </div>
          </React.Fragment>
       );
    }
 }
-export default App;
