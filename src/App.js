@@ -85,7 +85,7 @@ export default class App extends Component {
 
          setTimeout(() => {
             document.getElementById('LoadingDiv').style.display = 'none';
-         }, 3000);
+         }, 1000);
       });
    }
    render() {
@@ -94,8 +94,11 @@ export default class App extends Component {
          <React.Fragment>
             <div id='LoadingDiv'>
                <div className='Spinner'></div>
+               <label>در حال دریافت اطلاعات</label>
             </div>
+
             <SearchBar SendData={this.SearchBarData} />
+
             <div className='Main'>
                <Location weather={this.state} refresh={this.SearchBarData} />
                {isTempExist === '' ? '' : <Tempreture weather={this.state} />}
